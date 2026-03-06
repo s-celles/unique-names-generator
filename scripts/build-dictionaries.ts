@@ -78,6 +78,20 @@ async function main(): Promise<void> {
   writeFileSync(join(OUT_DIR, "nouns.ts"), nounsContent, "utf-8");
   console.log(`  ✓ nouns.ts (${nouns.length} words)`);
 
+  // Generate barrel index.ts
+  const indexLines: string[] = [
+    "/** Auto-generated — do not edit. Run `npm run build:dictionaries` to regenerate. */",
+  ];
+  for (const name of DICTIONARIES) {
+    indexLines.push(
+      `export { ${name.toUpperCase()} } from "./${name}.js";`,
+    );
+  }
+  indexLines.push('export { NOUNS } from "./nouns.js";');
+  indexLines.push("");
+  writeFileSync(join(OUT_DIR, "index.ts"), indexLines.join("\n"), "utf-8");
+  console.log("  ✓ index.ts (barrel)");
+
   console.log("\nDone!");
 }
 
