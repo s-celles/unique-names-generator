@@ -84,7 +84,7 @@ Load a dictionary from a [Frictionless Data Package](https://specs.frictionlessd
 import { loadDictionary } from "@scelles/unique-names-generator";
 
 const animals = await loadDictionary(
-  "https://raw.githubusercontent.com/andreasonny83/unique-names-data/main/datapackage.json",
+  "https://raw.githubusercontent.com/s-celles/unique-names-data/main/datapackage.json",
   "animals",
 );
 ```
@@ -135,7 +135,7 @@ The following dictionaries are available from `@scelles/unique-names-generator/d
 | `NATO`        | NATO phonetic alphabet   |
 | `NOUNS`       | Common nouns             |
 
-These are auto-generated from the [unique-names-data](https://github.com/andreasonny83/unique-names-data) Frictionless Data Package.
+These are auto-generated from the [unique-names-data](https://github.com/s-celles/unique-names-data) Frictionless Data Package.
 
 ## Error Handling
 

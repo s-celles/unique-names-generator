@@ -72,6 +72,22 @@ Generate `n` names.
 
 **Throws:** `NamespaceExhaustedError` when all combinations are exhausted.
 
+### `combinationCount(dictionaries)`
+
+Return the total number of possible combinations for the given dictionaries.
+
+```ts
+import { combinationCount } from "@scelles/unique-names-generator";
+import {
+  ADJECTIVES,
+  COLORS,
+  ANIMALS,
+} from "@scelles/unique-names-generator/dictionaries";
+
+combinationCount([ADJECTIVES, COLORS, ANIMALS]);
+// => 600000
+```
+
 ### `loadDictionary(pathOrUrl, resourceName)`
 
 Load a dictionary from a Frictionless Data Package descriptor.

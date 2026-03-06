@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-03-06
+
 ### Added
 
 - Initial project structure with TypeScript, tsup, ESLint, Prettier, Vitest
