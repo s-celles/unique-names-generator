@@ -9,6 +9,7 @@
 !vitest.config.ts
 !eslint.config.mjs
 !.prettierrc
+!.releaserc.json
 !typedoc.json
 
 # Source code
