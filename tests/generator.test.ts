@@ -1,5 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { generateName, generateNames, NamespaceExhaustedError } from "../src/index.js";
+import {
+  generateName,
+  generateNames,
+  combinationCount,
+  NamespaceExhaustedError,
+} from "../src/index.js";
 
 const DICT_A = ["swift", "bold", "gentle"];
 const DICT_B = ["emerald", "crimson", "azure"];
@@ -109,9 +114,9 @@ describe("generateNames — batch", () => {
 
 describe("NamespaceExhaustedError", () => {
   it("should throw when all combinations are exhausted", () => {
-    expect(() =>
-      generateNames([["a"], ["b"]], 2, { seed: 42 }),
-    ).toThrow(NamespaceExhaustedError);
+    expect(() => generateNames([["a"], ["b"]], 2, { seed: 42 })).toThrow(
+      NamespaceExhaustedError,
+    );
   });
 
   it("should throw when exclude set exhausts the namespace", () => {
@@ -146,5 +151,66 @@ describe("determinism — seed parity", () => {
     const name1 = generateName([DICT_A, DICT_B, DICT_C], { seed: 12345 });
     const name2 = generateName([DICT_A, DICT_B, DICT_C], { seed: 12345 });
     expect(name1).toBe(name2);
+  });
+});
+
+describe("combinationCount", () => {
+  it("should return 0 for empty dictionaries array", () => {
+    expect(combinationCount([])).toBe(0);
+  });
+
+  it("should return single dictionary length", () => {
+    expect(combinationCount([["a", "b", "c"]])).toBe(3);
+  });
+
+  it("should return product of dictionary lengths", () => {
+    expect(combinationCount([DICT_A, DICT_B, DICT_C])).toBe(27);
+  });
+});
+
+describe("generateNames — brute-force fallback", () => {
+  it("should generate all possible unique names via brute-force", () => {
+    // 1x1 = 1 combo. Exclude it, then ask for 0 remaining after excluding
+    // Use a larger set: 3x1 = 3 combos. Exclude 2, request 1.
+    // With a bad seed the random path may fail and trigger brute-force.
+    // To guarantee brute-force: use exclude to fill seen, leaving only 1 combo
+    // and set maxAttempts low by having few combos.
+    const dict1 = ["alpha", "beta"];
+    const dict2 = ["one", "two"];
+    // Exclude 3 of 4. Only 1 combo left. Random attempts will mostly hit excluded.
+    const exclude = new Set(["Alpha One", "Alpha Two", "Beta One"]);
+    const names = generateNames([dict1, dict2], 1, {
+      seed: 1,
+      exclude,
+    });
+    expect(names).toHaveLength(1);
+    expect(names[0]).toBe("Beta Two");
+  });
+
+  it("should throw NamespaceExhaustedError when brute-force exhausts combos", () => {
+    // 2x1 = 2 combinations, request 3 unique
+    expect(() => generateNames([["a", "b"], ["c"]], 3, { seed: 42 })).toThrow(
+      NamespaceExhaustedError,
+    );
+  });
+
+  it("should handle brute-force with exclude set", () => {
+    // 2x2 = 4 combinations, exclude 2, request remaining 2
+    const exclude = new Set(["Alpha One", "Beta Two"]);
+    const names = generateNames(
+      [
+        ["alpha", "beta"],
+        ["one", "two"],
+      ],
+      2,
+      {
+        seed: 99,
+        exclude,
+      },
+    );
+    expect(names).toHaveLength(2);
+    for (const name of names) {
+      expect(exclude.has(name)).toBe(false);
+    }
   });
 });

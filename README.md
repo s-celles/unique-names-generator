@@ -24,7 +24,11 @@ npm install @scelles/unique-names-generator
 
 ```ts
 import { generateName, generateNames } from "@scelles/unique-names-generator";
-import { ADJECTIVES, COLORS, ANIMALS } from "@scelles/unique-names-generator/dictionaries";
+import {
+  ADJECTIVES,
+  COLORS,
+  ANIMALS,
+} from "@scelles/unique-names-generator/dictionaries";
 
 // Generate a single name
 const name = generateName([ADJECTIVES, COLORS, ANIMALS]);
@@ -48,6 +52,7 @@ const names = generateNames([ADJECTIVES, COLORS, ANIMALS], 5, {
 Generate a single random name by picking one word from each dictionary.
 
 **Parameters:**
+
 - `dictionaries: string[][]` — ordered array of word lists
 - `options.separator?: string` — word separator (default: `" "`)
 - `options.style?: "lowercase" | "capital" | "uppercase"` — formatting (default: `"capital"`)
@@ -58,6 +63,7 @@ Generate a single random name by picking one word from each dictionary.
 Generate `n` names.
 
 **Parameters:**
+
 - `dictionaries: string[][]` — ordered array of word lists
 - `n: number` — number of names to generate
 - `options.unique?: boolean` — ensure all names are unique (default: `true`)
@@ -71,6 +77,7 @@ Generate `n` names.
 Load a dictionary from a Frictionless Data Package descriptor.
 
 **Parameters:**
+
 - `pathOrUrl: string` — path or URL to a `datapackage.json`
 - `resourceName: string` — name of the resource to extract
 
@@ -87,16 +94,16 @@ const adjectives = await loadDictionary(
 
 Available via `@scelles/unique-names-generator/dictionaries`:
 
-| Constant     | Description                          |
-|-------------|--------------------------------------|
-| `ADJECTIVES` | General adjectives (traits, qualities) |
-| `COLORS`     | Color names                          |
-| `ANIMALS`    | Animal species                       |
-| `CELESTIAL`  | Space and astronomy terms            |
-| `NATURE`     | Natural elements and phenomena       |
-| `SCIENCE`    | Scientific terms                     |
-| `NUMBERS`    | Numeric strings (0–99)               |
-| `NATO`       | NATO phonetic alphabet               |
+| Constant     | Description                                  |
+| ------------ | -------------------------------------------- |
+| `ADJECTIVES` | General adjectives (traits, qualities)       |
+| `COLORS`     | Color names                                  |
+| `ANIMALS`    | Animal species                               |
+| `CELESTIAL`  | Space and astronomy terms                    |
+| `NATURE`     | Natural elements and phenomena               |
+| `SCIENCE`    | Scientific terms                             |
+| `NUMBERS`    | Numeric strings (0–99)                       |
+| `NATO`       | NATO phonetic alphabet                       |
 | `NOUNS`      | Union of animals, celestial, science, nature |
 
 ## Related Projects

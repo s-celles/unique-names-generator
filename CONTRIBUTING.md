@@ -41,14 +41,14 @@ All commits **must** follow the [Conventional Commits](https://www.conventionalc
 
 ### Commit Types
 
-| Type       | Description                              | Version Bump |
-|-----------|------------------------------------------|-------------|
-| `feat:`    | A new feature                            | Minor        |
-| `fix:`     | A bug fix                                | Patch        |
-| `docs:`    | Documentation changes                    | —            |
-| `test:`    | Adding or updating tests                 | —            |
-| `chore:`   | Maintenance tasks                        | —            |
-| `refactor:` | Code refactoring                        | —            |
+| Type               | Description                     | Version Bump |
+| ------------------ | ------------------------------- | ------------ |
+| `feat:`            | A new feature                   | Minor        |
+| `fix:`             | A bug fix                       | Patch        |
+| `docs:`            | Documentation changes           | —            |
+| `test:`            | Adding or updating tests        | —            |
+| `chore:`           | Maintenance tasks               | —            |
+| `refactor:`        | Code refactoring                | —            |
 | `BREAKING CHANGE:` | Breaking API change (in footer) | Major        |
 
 ### Examples

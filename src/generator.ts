@@ -13,11 +13,7 @@ export function combinationCount(dictionaries: string[][]): number {
 /**
  * Apply the formatting style to a generated name.
  */
-function applyStyle(
-  name: string,
-  separator: string,
-  style: Style,
-): string {
+function applyStyle(name: string, separator: string, style: Style): string {
   switch (style) {
     case "capital":
       return name
@@ -195,6 +191,9 @@ function bruteForceRemaining(
     if (!seen.has(name.toLowerCase())) {
       seen.add(name.toLowerCase());
       results.push(name);
+      if (results.length >= needed) {
+        return results;
+      }
     }
 
     // Increment indices (odometer-style)
