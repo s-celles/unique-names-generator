@@ -1,0 +1,38 @@
+name: Update Dictionaries
+
+on:
+  repository_dispatch:
+    types: [unique-names-data-release]
+  workflow_dispatch:
+  schedule:
+    # Check weekly for new data releases
+    - cron: "0 6 * * 1"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    name: Update dictionaries from unique-names-data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run build:dictionaries
+      - name: Check for changes
+        id: changes
+        run: |
+          git diff --quiet src/dictionaries/ || echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Commit and push
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/dictionaries/
+          git commit -m "fix: update dictionaries from unique-names-data"
+          git push

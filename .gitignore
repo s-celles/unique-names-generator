@@ -1,3 +1,50 @@
+*
+
+####################################
+
+!package.json
+!package-lock.json
+!tsconfig.json
+!tsup.config.ts
+!vitest.config.ts
+!eslint.config.mjs
+!.prettierrc
+!typedoc.json
+
+# Source code
+!src/
+!src/**
+!scripts/
+!scripts/**
+
+# Tests
+!tests/
+!tests/**
+
+# Documentation & repo files
+!docs/
+!docs/**
+!README.md
+!CHANGELOG.md
+!CONTRIBUTING.md
+!SECURITY.md
+!LICENSE
+
+# GitHub config
+!.github/
+!.github/**
+
+# Gitignore itself
+!.gitignore
+
+####################################
+
+# Ignore auto-generated dictionary files
+src/dictionaries/
+
+# Ignore auto-generated API docs
+docs/api/
+
 # Logs
 logs
 *.log

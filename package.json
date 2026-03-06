@@ -1,0 +1,93 @@
+{
+  "name": "@scelles/unique-names-generator",
+  "version": "0.0.0-development",
+  "description": "A generic, type-safe, and deterministic pseudonym generator in TypeScript",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./dictionaries": {
+      "import": {
+        "types": "./dist/dictionaries/index.d.ts",
+        "default": "./dist/dictionaries/index.js"
+      },
+      "require": {
+        "types": "./dist/dictionaries/index.d.cts",
+        "default": "./dist/dictionaries/index.cjs"
+      }
+    }
+  },
+  "type": "module",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "build:dictionaries": "tsx scripts/build-dictionaries.ts",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src/ tests/",
+    "lint:fix": "eslint src/ tests/ --fix",
+    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\" \"*.{json,md}\"",
+    "format:check": "prettier --check \"src/**/*.ts\" \"tests/**/*.ts\" \"*.{json,md}\"",
+    "typecheck": "tsc --noEmit",
+    "docs": "typedoc",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/s-celles/unique-names-generator.git"
+  },
+  "keywords": [
+    "unique-names",
+    "name-generator",
+    "pseudonym",
+    "deterministic",
+    "typescript",
+    "frictionless-data"
+  ],
+  "author": "Sébastien Celles",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/s-celles/unique-names-generator/issues"
+  },
+  "homepage": "https://github.com/s-celles/unique-names-generator#readme",
+  "dependencies": {
+    "datapackage": "^1.1.10",
+    "seedrandom": "^3.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/seedrandom": "^3.0.8",
+    "@vitest/coverage-v8": "^3.0.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.0.0",
+    "tsup": "^8.0.0",
+    "tsx": "^4.0.0",
+    "typedoc": "^0.27.0",
+    "typescript": "^5.7.0",
+    "typescript-eslint": "^8.0.0",
+    "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
